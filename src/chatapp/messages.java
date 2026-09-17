@@ -76,6 +76,9 @@ public class messages {
         }
         return false;   
     }
+    public static String melodius(String me){
+        return "me";
+    }
 }
        
 
