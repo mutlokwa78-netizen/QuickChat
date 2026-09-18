@@ -40,7 +40,10 @@ public class Login {
     }
 
     public  boolean underscore(String username) {
-        return username.contains("_");
+        if (username.contains("_")){
+            return true;
+        }
+        return false;
     }
 
     public  boolean length_(String username) {
