@@ -105,23 +105,15 @@ public class Login {
             
     }
     public  boolean cellphone_Code(String cellphone){
-        if (cellphone.contains("+27")){
-            return true;
-        }
-        return false;
-    }
-    public  boolean cellphone_length(String cellphone){
-        if (cellphone.length() == 12){
-            return true;
-        }
-        return false;
-    } 
+        String regex = "\\+27[0-9]{9}";
+        return cellphone.matches(regex);
+        } 
     public  void cellphone_validator(String cellphone){
-        if (cellphone_Code(cellphone) && cellphone_length(cellphone)){
+        if (cellphone_Code(cellphone)){
             System.out.println("Cell number captured successfully");
         }
         else{
-            System.out.println("Cell number not formatted succcessfully! or does not have an international code, please correct the number and try again ");
+            System.out.println("Cell number not formatted correctly or does not have an international code, please correct the number and try again ");
             
         }
           
@@ -150,8 +142,8 @@ public class Login {
                 Surname = scanner.nextLine();
                 System.out.print("Create your username here :     ");
                 Username = scanner.nextLine();
-                while(!underscore(Username) && !length_(Username)){
-                    
+                while(!underscore(Username) || !length_(Username)){
+                    username_valid(Username);
                     System.out.print("Re-Create your username here :     ");
                 Username = scanner.nextLine();
                 }
@@ -164,8 +156,8 @@ public class Login {
                 
                 System.out.print("Please create your password here:   ");
                 Password =  scanner.nextLine();
-                while (!uppercase(Password) && !special_character(Password) && !length_password(Password) && !digit(Password)){
-                
+                while (!uppercase(Password) || !special_character(Password) || !length_password(Password) || !digit(Password)){
+                password_validator(Password);
                 System.out.print("Please re-create your password here:   ");
                 Password =  scanner.nextLine();
                 }
@@ -173,11 +165,12 @@ public class Login {
                 
                 System.out.print("Please enter your cellphone number here:    ");
                 String cellphone = scanner.nextLine();
-                while (!cellphone_Code(cellphone) && !cellphone_length(cellphone)){
+                while (!cellphone_Code(cellphone)){
                 cellphone_validator(cellphone);
                 System.out.print("Please re-enter your cellphone number here:    ");
                 cellphone = scanner.nextLine();
                 }
+                cellphone_validator(cellphone);
                 System.out.println(Name +"  "+ Surname +"   have been successfully registered!");
                 
                 
