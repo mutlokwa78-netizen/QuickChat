@@ -1,265 +1,348 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
+
 package chatapp1;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- *
- * @author Acer
- */
 public class LoginTest {
-    
-    public LoginTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
+
+    private InputStream originalInput;
+    private PrintStream originalOutput;
+
     @BeforeEach
     public void setUp() {
+        originalInput = System.in;
+        originalOutput = System.out;
+        Login.user = null;
+        Login.user_password = null;
     }
-    
+
     @AfterEach
     public void tearDown() {
+        System.setIn(originalInput);
+        System.setOut(originalOutput);
+        Login.user = null;
+        Login.user_password = null;
     }
 
-    /**
-     * Test of main method, of class Login.
-     */
+    // Simulate keyboard input
+    private void setInput(String input) {
+        System.setIn(new ByteArrayInputStream(
+                input.getBytes(StandardCharsets.UTF_8)));
+    }
 
-    /**
-     * Test of numbers method, of class Login.
-     */
+    // Capture printed output
+    private String getOutput(Runnable action) {
+        ByteArrayOutputStream output =
+                new ByteArrayOutputStream();
+
+        try (PrintStream capture = new PrintStream(output)) {
+            System.setOut(capture);
+            action.run();
+        } finally {
+            System.setOut(originalOutput);
+        }
+
+        return output.toString(StandardCharsets.UTF_8);
+    }
+
+    // Create a registered account for testing
+    private Login registeredUser() {
+        Login login = new Login();
+        login.Name = "Kyle";
+        login.Surname = "Smith";
+        login.Username = "kyl_1";
+        login.Password = "Ch&&sec@ke99!";
+        return login;
+    }
+
+    // TEST 1: Username contains numbers
     @Test
     public void testNumbers() {
-        System.out.println("numbers");
-        String username = "_Meo";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.numbers(username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-      
+        Login login = new Login();
+
+        assertTrue(login.numbers("kyl_1"));
+        assertFalse(login.numbers("kyl_a"));
     }
 
-    /**
-     * Test of special_character method, of class Login.
-     */
+    // TEST 2: Password special character
     @Test
     public void testSpecial_character() {
-        System.out.println("special_character");
-        String password = "Gontse!123";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.special_character(password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       
+        Login login = new Login();
+
+        assertTrue(login.special_character("Ch&&sec@ke99!"));
+        assertFalse(login.special_character("Password123"));
     }
 
-    /**
-     * Test of underscore method, of class Login.
-     */
+    // TEST 3: Username underscore
     @Test
     public void testUnderscore() {
-        System.out.println("underscore");
-        String username = "_Meo";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.underscore(username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        Login login = new Login();
+
+        assertTrue(login.underscore("kyl_1"));
+        assertFalse(login.underscore("kyle"));
     }
 
-    /**
-     * Test of length_ method, of class Login.
-     */
+    // TEST 4: Username length
     @Test
     public void testLength_() {
-        System.out.println("length_");
-        String username = "_Meo";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.length_(username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        Login login = new Login();
+
+        assertTrue(login.length_("kyl_1"));
+        assertFalse(login.length_("kyle!!!!!!!"));
     }
 
-    /**
-     * Test of length_password method, of class Login.
-     */
+    // TEST 5: Password length
     @Test
     public void testLength_password() {
-        System.out.println("length_password");
-        String password = "Gontse!123";
-        boolean expResult = false;
-        boolean result = Login.length_password(password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+
+        assertTrue(Login.length_password("Ch&&sec@ke99!"));
+        assertFalse(Login.length_password("pass123"));
     }
 
-    /**
-     * Test of uppercase method, of class Login.
-     */
+    // TEST 6: Uppercase character
     @Test
     public void testUppercase() {
-        System.out.println("uppercase");
-        String username = "_Meo";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.uppercase(username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       
+        Login login = new Login();
+
+        assertTrue(login.uppercase("Ch&&sec@ke99!"));
+        assertFalse(login.uppercase("password123"));
     }
 
-    /**
-     * Test of digit method, of class Login.
-     */
+    // TEST 7: Password contains digit
     @Test
     public void testDigit() {
-        System.out.println("digit");
-        String password = "Gontse!123";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.digit(password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        Login login = new Login();
+
+        assertTrue(login.digit("Ch&&sec@ke99!"));
+        assertFalse(login.digit("Password!"));
     }
 
-    /**
-     * Test of lowercase method, of class Login.
-     */
+    // TEST 8: Lowercase character
     @Test
     public void testLowercase() {
-        System.out.println("lowercase");
-        String username = "_Meo";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.lowercase(username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        Login login = new Login();
+
+        assertTrue(login.lowercase("kyl_1"));
+        assertFalse(login.lowercase("KYL_1"));
     }
 
-    /**
-     * Test of username_valid method, of class Login.
-     */
+    // TEST 9: Username correctly formatted
     @Test
     public void testUsername_valid() {
-        System.out.println("username_valid");
-        String username = "_meo";
-        Login instance = new Login();
-        instance.username_valid(username);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        Login login = new Login();
+
+        String output = getOutput(() ->
+                login.username_valid("kyl_1"));
+
+        assertEquals(
+                "Username captured successfully!",
+                output.trim());
     }
 
-    /**
-     * Test of password_validator method, of class Login.
-     */
+    // TEST 10: Username incorrectly formatted
+    @Test
+    public void testUsername_invalid() {
+        Login login = new Login();
+
+        String output = getOutput(() ->
+                login.username_valid("kyle!!!!!!!"));
+
+        assertTrue(output.contains(
+                "Username is not correctly formatted"));
+    }
+
+    // TEST 11: Password meets requirements
     @Test
     public void testPassword_validator() {
-        System.out.println("password_validator");
-        String password = "Gontse!123";
-        Login instance = new Login();
-        instance.password_validator(password);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        Login login = new Login();
+
+        String output = getOutput(() ->
+                login.password_validator("Ch&&sec@ke99!"));
+
+        assertEquals(
+                "Password successfully captured.",
+                output.trim());
     }
 
-    /**
-     * Test of cellphone_Code method, of class Login.
-     */
+    // TEST 12: Invalid password
+    @Test
+    public void testPassword_invalid() {
+        Login login = new Login();
+
+        String output = getOutput(() ->
+                login.password_validator("password"));
+
+        assertEquals(
+                "Password is not correctly formatted; please "
+                + "ensure that the password contains at least "
+                + "eight characters, a capital letter, a number, "
+                + "and a special character.",
+                output.trim());
+    }
+
+    // TEST 13: Cellphone format
     @Test
     public void testCellphone_Code() {
-        System.out.println("cellphone_Code");
-        String cellphone = "+27655667272";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.cellphone_Code(cellphone);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        Login login = new Login();
+
+        assertTrue(login.cellphone_Code("+27838968976"));
+        assertFalse(login.cellphone_Code("08966553"));
     }
 
-    /**
-     * Test of cellphone_validator method, of class Login.
-     */
+    // TEST 14: Valid cellphone response
     @Test
     public void testCellphone_validator() {
-        System.out.println("cellphone_validator");
-        String cellphone = "+2765667272";
-        Login instance = new Login();
-        instance.cellphone_validator(cellphone);
-        // TODO review the generated test code and remove the default call to fail.
+        Login login = new Login();
+
+        String output = getOutput(() ->
+                login.cellphone_validator("+27838968976"));
+
+        assertEquals(
+                "Cell number successfully captured.",
+                output.trim());
     }
 
-    /**
-     * Test of loginUser method, of class Login.
-     */
+    // TEST 15: Invalid cellphone response
     @Test
-    public void testLoginUser() {
-        System.out.println("loginUser");
-        Login instance = new Login();
-        instance.loginUser();
-        // TODO review the generated test code and remove the default call to fail.
+    public void testCellphone_invalid() {
+        Login login = new Login();
+
+        String output = getOutput(() ->
+                login.cellphone_validator("08966553"));
+
+        assertTrue(output.contains(
+                "international code"));
     }
 
-    /**
-     * Test of registerUser method, of class Login.
-     */
+    // TEST 16: Successful login
+    @Test
+    public void testReturnLoginStatusSuccess() {
+        Login login = registeredUser();
+
+        assertTrue(login.returnLoginStatus(
+                "kyl_1", "Ch&&sec@ke99!"));
+    }
+
+    // TEST 17: Failed login
+    @Test
+    public void testReturnLoginStatusFailure() {
+        Login login = registeredUser();
+
+        assertFalse(login.returnLoginStatus(
+                "kyl_1", "wrongpassword"));
+
+        assertFalse(login.returnLoginStatus(
+                "wrongname", "Ch&&sec@ke99!"));
+    }
+
+    // TEST 18: Registration
     @Test
     public void testRegisterUser() {
-        System.out.println("registerUser");
-        Login instance = new Login();
-        instance.registerUser();
-        // TODO review the generated test code and remove the default call to fail.
+
+        setInput(
+                "Kyle\n"
+                + "Smith\n"
+                + "kyl_1\n"
+                + "Ch&&sec@ke99!\n"
+                + "+27838968976\n");
+
+        Login login = new Login();
+
+        String output = getOutput(() ->
+                login.registerUser());
+
+        assertEquals("Kyle", login.Name);
+        assertEquals("Smith", login.Surname);
+        assertEquals("kyl_1", login.Username);
+        assertEquals("Ch&&sec@ke99!", login.Password);
+
+        assertTrue(output.contains(
+                "Welcome Kyle, Smith it is great to see you."));
     }
 
-    /**
-     * Test of returnLoginStatus method, of class Login.
-     */
+    // TEST 19: Invalid details during registration
     @Test
-    public void testReturnLoginStatus() {
-        System.out.println("returnLoginStatus");
-        String user = "_Meo";
-        String user_password = "Gontse!123";
-        Login instance = new Login();
-        boolean expResult = false;
-        boolean result = instance.returnLoginStatus(user, user_password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+    public void testRegisterUserRetry() {
+
+        setInput(
+                "Kyle\n"
+                + "Smith\n"
+                + "kyle!!!!!!!\n"
+                + "kyl_1\n"
+                + "password\n"
+                + "Ch&&sec@ke99!\n"
+                + "08966553\n"
+                + "+27838968976\n");
+
+        Login login = new Login();
+
+        String output = getOutput(() ->
+                login.registerUser());
+
+        assertEquals("kyl_1", login.Username);
+        assertEquals("Ch&&sec@ke99!", login.Password);
+
+        assertTrue(output.contains(
+                "Username is not correctly formatted"));
+
+        assertTrue(output.contains(
+                "Password is not correctly formatted"));
+
+        assertTrue(output.contains(
+                "international code"));
     }
 
-    /**
-     * Test of returnUserLoginStatus method, of class Login.
-     */
+    // TEST 20: Login using keyboard input
+    @Test
+    public void testLoginUser() {
+
+        setInput("kyl_1\nCh&&sec@ke99!\n");
+
+        Login login = registeredUser();
+
+        String output = getOutput(() ->
+                login.loginUser());
+
+        assertEquals("kyl_1", Login.user);
+
+        assertTrue(output.contains("Login Successful"));
+    }
+
+    // TEST 21: Return user login status
     @Test
     public void testReturnUserLoginStatus() {
-        System.out.println("returnUserLoginStatus");
-        String username = "_Meo";
-        String password = "Gontse!123";
-        Login instance = new Login();
-        instance.returnUserLoginStatus(username, password);
-        // TODO review the generated test code and remove the default call to fail.
+
+        Login login = registeredUser();
+
+        String output = getOutput(() ->
+                login.returnUserLoginStatus(
+                        "kyl_1", "Ch&&sec@ke99!"));
+
+        assertTrue(output.contains("Login Successful"));
     }
-    
+
+    // TEST 22: Login retry after incorrect credentials
+    @Test
+    public void testLoginRetry() {
+
+        setInput("kyl_1\nCh&&sec@ke99!\n");
+
+        Login login = registeredUser();
+
+        String output = getOutput(() ->
+                login.returnUserLoginStatus(
+                        "wrongname", "wrongpassword"));
+
+        assertTrue(output.contains("Login Failed"));
+        assertTrue(output.contains("Login Successful"));
+    }
 }

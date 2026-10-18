@@ -98,30 +98,38 @@ public class Login {
             
 
     }
-    public  void password_validator(String password){
-        if (uppercase(password) && special_character(password) && length_password(password) && digit(password) ){
-            System.out.println("Password captured successfully ");
-        }
-        else{
-            System.out.println("Password is not correctly formatted! Please ensure that the password has atleast eight characters, a capital letter, a number and a special character");
-                }
-            
+    public void password_validator(String password) {
+
+    if (uppercase(password) && special_character(password)
+            && length_password(password) && digit(password)) {
+
+        System.out.println("Password successfully captured.");
+
+    } else {
+        System.out.println(
+            "Password is not correctly formatted; please "
+            + "ensure that the password contains at least "
+            + "eight characters, a capital letter, a number, "
+            + "and a special character.");
     }
+}
     public  boolean cellphone_Code(String cellphone){
         String regex = "\\+27[0-9]{9}";
         return cellphone.matches(regex);
         } 
-    public  void cellphone_validator(String cellphone){
-        if (cellphone_Code(cellphone)){
-            System.out.println("Cell number captured successfully");
-        }
-        else{
-            System.out.println("Cell number not formatted correctly or does not have an international code, please correct the number and try again ");
-            
-        }
-          
-     
+    public void cellphone_validator(String cellphone) {
+
+    if (cellphone_Code(cellphone)) {
+
+        System.out.println("Cell number successfully captured.");
+
+    } else {
+        System.out.println(
+            "Cell number is incorrectly formatted or does "
+            + "not contain an international code, please "
+            + "correct the number and try again.");
     }
+}
     public void loginUser(){
 
         System.out.println("Welcome to the login page of the ChatApp");
@@ -135,56 +143,74 @@ public class Login {
         
         }
     
-    public void registerUser(){
-        Scanner scanner = new Scanner(System.in);
-                
-                System.out.println("Welcome Registration page for the ChatApp");
-                System.out.print("Please enter your name    ");
-                Name = scanner.nextLine();
-                System.out.print("Please enter your surname     ");
-                Surname = scanner.nextLine();
-                System.out.print("Create your username here :     ");
-                Username = scanner.nextLine();
-                while(!underscore(Username) || !length_(Username)){
-                    username_valid(Username);
-                    System.out.print("Re-Create your username here :     ");
-                Username = scanner.nextLine();
-                }
-                username_valid(Username);
-                
-                
-                        
-                System.out.println("Welcome " + Name +" "+ Surname +"  it is great to see you again!" );
-                
-                
-                System.out.print("Please create your password here:   ");
-                Password =  scanner.nextLine();
-                while (!uppercase(Password) || !special_character(Password) || !length_password(Password) || !digit(Password)){
-                password_validator(Password);
-                System.out.print("Please re-create your password here:   ");
-                Password =  scanner.nextLine();
-                }
-                password_validator(Password);
-                
-                System.out.print("Please enter your cellphone number here:    ");
-                String cellphone = scanner.nextLine();
-                while (!cellphone_Code(cellphone)){
-                cellphone_validator(cellphone);
-                System.out.print("Please re-enter your cellphone number here:    ");
-                cellphone = scanner.nextLine();
-                }
-                cellphone_validator(cellphone);
-                System.out.println(Name +"  "+ Surname +"   have been successfully registered!");
-                
-                
-                
-        }
-    public boolean returnLoginStatus(String user, String user_password){
-        if (Username.equals(user )&& Password.equals(user_password)){
-            return true;
-        }
+    public void registerUser() {
+
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Welcome Registration page for the ChatApp");
+
+    System.out.print("Please enter your name: ");
+    Name = scanner.nextLine();
+
+    System.out.print("Please enter your surname: ");
+    Surname = scanner.nextLine();
+
+    System.out.print("Create your username: ");
+    Username = scanner.nextLine();
+
+    while (!underscore(Username) || !length_(Username)) {
+
+        username_valid(Username);
+
+        System.out.print("Re-create your username: ");
+        Username = scanner.nextLine();
+    }
+
+    username_valid(Username);
+
+    System.out.println("Welcome " + Name + ", "
+            + Surname + " it is great to see you.");
+
+    System.out.print("Please create your password: ");
+    Password = scanner.nextLine();
+
+    while (!uppercase(Password)
+            || !special_character(Password)
+            || !length_password(Password)
+            || !digit(Password)) {
+
+        password_validator(Password);
+
+        System.out.print("Please re-create your password: ");
+        Password = scanner.nextLine();
+    }
+
+    password_validator(Password);
+
+    System.out.print("Please enter your cellphone number: ");
+    String cellphone = scanner.nextLine();
+
+    while (!cellphone_Code(cellphone)) {
+
+        cellphone_validator(cellphone);
+
+        System.out.print("Please re-enter your cellphone number: ");
+        cellphone = scanner.nextLine();
+    }
+
+    cellphone_validator(cellphone);
+
+    System.out.println(Name + " " + Surname
+            + " have been successfully registered!");
+}
+   public boolean returnLoginStatus(String user, String user_password) {
+
+    if (Username == null || Password == null) {
         return false;
     }
+
+    return Username.equals(user) && Password.equals(user_password);
+}
     public void returnUserLoginStatus(String username, String password){
         while (!returnLoginStatus(username,password)){
         if (returnLoginStatus(username,password)){
