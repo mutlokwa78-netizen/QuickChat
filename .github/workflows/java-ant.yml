@@ -1,0 +1,48 @@
+
+name: Java Ant Unit Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 26
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '26'
+
+      - name: Download JUnit 5
+        run: |
+          mkdir -p .ci
+          curl -fL --retry 3 \
+            -o .ci/junit5.jar \
+            https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-console-standalone/1.12.1/junit-platform-console-standalone-1.12.1.jar
+
+      - name: Verify JUnit Download
+        run: |
+          ls -lh .ci/junit5.jar
+          jar tf .ci/junit5.jar | grep org/junit/jupiter/api/Test.class
+
+      - name: Compile Project
+        run: ant -noinput compile
+
+      - name: Compile JUnit Tests
+        run: |
+          ant -noinput \
+            "-Djavac.test.classpath=$(pwd)/build/classes:$(pwd)/.ci/junit5.jar" \
+            compile-test
+
+      - name: Execute JUnit Tests
+        run: |
+          java -jar .ci/junit5.jar execute \
+            --class-path build/classes:build/test/classes \
+            --scan-class-path \
+            --fail-if-no-tests
