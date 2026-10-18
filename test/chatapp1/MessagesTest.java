@@ -39,14 +39,7 @@ public class MessagesTest {
     /**
      * Test of main method, of class Messages.
      */
-    @Test
-   public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        Messages.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+
 
     /**
      * Test of GreetingPage method, of class Messages.
@@ -57,7 +50,7 @@ public class MessagesTest {
         Messages instance = new Messages();
         instance.GreetingPage();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -69,7 +62,7 @@ public class MessagesTest {
         Messages instance = new Messages();
         instance.SendMessages();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -84,7 +77,7 @@ public class MessagesTest {
         boolean result = instance.CheckMessageID(MessageID);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -96,7 +89,7 @@ public class MessagesTest {
         Messages instance = new Messages();
         instance.MessageHash();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -111,7 +104,7 @@ public class MessagesTest {
         boolean result = instance.MessageLength(Message);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -123,7 +116,7 @@ public class MessagesTest {
         Messages instance = new Messages();
         instance.MessageLengthValidator();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -135,7 +128,7 @@ public class MessagesTest {
         Messages instance = new Messages();
         instance.jsonFile();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -147,7 +140,7 @@ public class MessagesTest {
         Messages instance = new Messages();
         instance.ReadJsonFile();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

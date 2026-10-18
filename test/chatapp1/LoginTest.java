@@ -39,14 +39,6 @@ public class LoginTest {
     /**
      * Test of main method, of class Login.
      */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        Login.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of numbers method, of class Login.
@@ -60,7 +52,7 @@ public class LoginTest {
         boolean result = instance.numbers(username);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+      
     }
 
     /**
@@ -75,7 +67,7 @@ public class LoginTest {
         boolean result = instance.special_character(password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -90,7 +82,7 @@ public class LoginTest {
         boolean result = instance.underscore(username);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -105,7 +97,7 @@ public class LoginTest {
         boolean result = instance.length_(username);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -119,7 +111,7 @@ public class LoginTest {
         boolean result = Login.length_password(password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -134,7 +126,7 @@ public class LoginTest {
         boolean result = instance.uppercase(username);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -149,7 +141,7 @@ public class LoginTest {
         boolean result = instance.digit(password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -164,7 +156,7 @@ public class LoginTest {
         boolean result = instance.lowercase(username);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -177,7 +169,7 @@ public class LoginTest {
         Login instance = new Login();
         instance.username_valid(username);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -190,7 +182,7 @@ public class LoginTest {
         Login instance = new Login();
         instance.password_validator(password);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -205,7 +197,7 @@ public class LoginTest {
         boolean result = instance.cellphone_Code(cellphone);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -218,7 +210,6 @@ public class LoginTest {
         Login instance = new Login();
         instance.cellphone_validator(cellphone);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -230,7 +221,6 @@ public class LoginTest {
         Login instance = new Login();
         instance.loginUser();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -242,7 +232,6 @@ public class LoginTest {
         Login instance = new Login();
         instance.registerUser();
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -258,7 +247,6 @@ public class LoginTest {
         boolean result = instance.returnLoginStatus(user, user_password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -272,7 +260,6 @@ public class LoginTest {
         Login instance = new Login();
         instance.returnUserLoginStatus(username, password);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

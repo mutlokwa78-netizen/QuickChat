@@ -29,15 +29,8 @@ public class Messages {
     static String Message;
     static int MessagesSent;
 
-    public static void main(String[]args){
-        
-
-
-        
-         }
-    
     public void GreetingPage(){
-
+           
         System.out.println("");
         
         System.out.println("Welcome to QuickChat!");
@@ -47,7 +40,7 @@ public class Messages {
         System.out.println("3. Stored Messages  ");
         System.out.println("4. Quit");
         int choice = scanner.nextInt();
-        
+        do {
         switch (choice){
             case 1 -> {
                 SendMessages();
@@ -67,6 +60,7 @@ public class Messages {
                 System.out.println("Invalid option! Please try again");
             }
         }
+        }while (choice !=3);
             
 
     }
@@ -89,8 +83,10 @@ public class Messages {
         Message = scanner.nextLine();
         System.out.println("Please choose from the following options");
         System.out.println("1. Send Message");
-        System.out.println("2. Store your message");
-        System.out.println("Press '0' to delete the message");
+        System.out.println("2. Disregard Message");
+        System.out.println("3. store message for later");
+        
+        
         MessagesSent = messages;
         UniqueMessageId = random.nextInt(1000000000)+999999999;
        
@@ -104,12 +100,23 @@ public class Messages {
                 
             
             }
-            case 0-> {
-                System.out.println("Message Deleted successfully!");
+            case 2-> {
+                
+                System.out.println("Press '0' to delete the message");
+                System.out.print("Please enter here:    ");
+                int choice3 = scanner.nextInt();
+                switch (choice3){
+                    case 0 -> {
+                        System.out.println("Message delete successfully!");
+                    }
+                }
                 
             }
-            case 2->{
+            case 3->{
                 jsonFile();
+            }
+            default ->{
+                System.out.println("Please enter a valid option");
             }
         
 
@@ -155,9 +162,9 @@ public class Messages {
         if (MessageLength(Message)){
           System.out.println("Message sent!");
           System.out.println("Message ID: "+UniqueMessageId);
-          System.out.println("Message Recipient's number :    "+cellphone);
           System.out.print("Message Hash:   ");
           MessageHash();
+          System.out.println("Message Recipient's number :    "+cellphone);
           System.out.println("Message:    "+Message);    
         }
         else{
@@ -207,7 +214,7 @@ public class Messages {
     }
     
     public void StoredMessages(){
-
+           
     }
     
     
