@@ -98,7 +98,7 @@ public class MessagesTest {
     @Test
     public void testMessageLength() {
         System.out.println("MessageLength");
-        String Message = "";
+        String Message = "Hi Mike, can you join us for dinner?";
         Messages instance = new Messages();
         boolean expResult = false;
         boolean result = instance.MessageLength(Message);
