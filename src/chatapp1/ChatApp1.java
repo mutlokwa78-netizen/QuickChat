@@ -13,6 +13,8 @@ public class ChatApp1 {
     /**
      * @param args the command line arguments
      */
+    
+    // This is the main method which will be executed once the CHATAPP runs
     public static void main(String[]args) {
         Scanner scanner = new Scanner(System.in);
         Login key = new Login();

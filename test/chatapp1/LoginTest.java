@@ -237,11 +237,8 @@ public class LoginTest {
     public void testReturnLoginStatusFailure() {
         Login login = registeredUser();
 
-        assertFalse(login.returnLoginStatus(
-                "kyl_1", "wrongpassword"));
-
-        assertFalse(login.returnLoginStatus(
-                "wrongname", "Ch&&sec@ke99!"));
+        assertFalse(login.returnLoginStatus("kyl_1", "wrongpassword"));
+        assertFalse(login.returnLoginStatus( "wrongname", "Ch&&sec@ke99!"));
     }
 
     // TEST 18: Registration
@@ -265,8 +262,7 @@ public class LoginTest {
         assertEquals("kyl_1", login.Username);
         assertEquals("Ch&&sec@ke99!", login.Password);
 
-        assertTrue(output.contains(
-                "Welcome Kyle, Smith it is great to see you."));
+        assertTrue(output.contains("Welcome Kyle, Smith it is great to see you."));
     }
 
     // TEST 19: Invalid details during registration
@@ -291,14 +287,11 @@ public class LoginTest {
         assertEquals("kyl_1", login.Username);
         assertEquals("Ch&&sec@ke99!", login.Password);
 
-        assertTrue(output.contains(
-                "Username is not correctly formatted"));
+        assertTrue(output.contains("Username is not correctly formatted"));
 
-        assertTrue(output.contains(
-                "Password is not correctly formatted"));
+        assertTrue(output.contains( "Password is not correctly formatted"));
 
-        assertTrue(output.contains(
-                "international code"));
+        assertTrue(output.contains("international code"));
     }
 
     // TEST 20: Login using keyboard input
@@ -309,11 +302,8 @@ public class LoginTest {
 
         Login login = registeredUser();
 
-        String output = getOutput(() ->
-                login.loginUser());
-
+        String output = getOutput(() -> login.loginUser());
         assertEquals("kyl_1", Login.user);
-
         assertTrue(output.contains("Login Successful"));
     }
 
@@ -324,8 +314,7 @@ public class LoginTest {
         Login login = registeredUser();
 
         String output = getOutput(() ->
-                login.returnUserLoginStatus(
-                        "kyl_1", "Ch&&sec@ke99!"));
+                login.returnUserLoginStatus("kyl_1", "Ch&&sec@ke99!"));
 
         assertTrue(output.contains("Login Successful"));
     }
@@ -339,9 +328,7 @@ public class LoginTest {
         Login login = registeredUser();
 
         String output = getOutput(() ->
-                login.returnUserLoginStatus(
-                        "wrongname", "wrongpassword"));
-
+                login.returnUserLoginStatus("wrongname", "wrongpassword"));
         assertTrue(output.contains("Login Failed"));
         assertTrue(output.contains("Login Successful"));
     }

@@ -9,6 +9,7 @@ import java.util.Scanner;
 /**
  *
  * @author Acer
+ * 
  */
 public class Login {
         String Name;
@@ -17,12 +18,7 @@ public class Login {
         String Password;
         static String user;
         static String user_password;
-        Scanner key = new Scanner(System.in);
-    
-        public static void main(String[] args) {
-
-        }
-    
+        Scanner key = new Scanner(System.in);    
 
     public  boolean numbers(String username) {
         for (char chr : username.toCharArray()) {
@@ -120,14 +116,11 @@ public class Login {
     public void cellphone_validator(String cellphone) {
 
     if (cellphone_Code(cellphone)) {
-
         System.out.println("Cell number successfully captured.");
 
     } else {
         System.out.println(
-            "Cell number is incorrectly formatted or does "
-            + "not contain an international code, please "
-            + "correct the number and try again.");
+            "Cell number is incorrectly formatted or does not contain an international code, please correct the number and try again.");
     }
 }
     public void loginUser(){
@@ -136,7 +129,7 @@ public class Login {
         System.out.print("Please enter your Username here:    ");
         user = key.nextLine();
         System.out.print("Please enter your password here:   ");
-        String user_password = key.nextLine();
+        user_password = key.nextLine();
         returnUserLoginStatus(user,user_password);
         
         
@@ -159,28 +152,19 @@ public class Login {
     Username = scanner.nextLine();
 
     while (!underscore(Username) || !length_(Username)) {
-
         username_valid(Username);
-
         System.out.print("Re-create your username: ");
         Username = scanner.nextLine();
     }
 
     username_valid(Username);
-
-    System.out.println("Welcome " + Name + ", "
-            + Surname + " it is great to see you.");
+    System.out.println("Welcome " + Name + ", " + Surname + " it is great to see you.");
 
     System.out.print("Please create your password: ");
     Password = scanner.nextLine();
 
-    while (!uppercase(Password)
-            || !special_character(Password)
-            || !length_password(Password)
-            || !digit(Password)) {
-
+    while (!uppercase(Password)|| !special_character(Password)|| !length_password(Password)|| !digit(Password)) {
         password_validator(Password);
-
         System.out.print("Please re-create your password: ");
         Password = scanner.nextLine();
     }
@@ -191,17 +175,14 @@ public class Login {
     String cellphone = scanner.nextLine();
 
     while (!cellphone_Code(cellphone)) {
-
         cellphone_validator(cellphone);
-
         System.out.print("Please re-enter your cellphone number: ");
         cellphone = scanner.nextLine();
     }
 
     cellphone_validator(cellphone);
 
-    System.out.println(Name + " " + Surname
-            + " have been successfully registered!");
+    System.out.println(Name + " " + Surname + "have been successfully registered!");
 }
    public boolean returnLoginStatus(String user, String user_password) {
 
@@ -211,22 +192,23 @@ public class Login {
 
     return Username.equals(user) && Password.equals(user_password);
 }
-    public void returnUserLoginStatus(String username, String password){
-        while (!returnLoginStatus(username,password)){
-        if (returnLoginStatus(username,password)){
-            System.out.println("Login Successful");
-        }
-        else {
-            System.out.println("Login Failed");
-            System.out.print("Please enter your Username here:    ");
-            user = key.nextLine();  
-            System.out.print("Please enter your password here:   ");
-            user_password = key.nextLine();            
-            
-        }
-        }
-        
+   public void returnUserLoginStatus(String username, String password) {
+
+    while (!returnLoginStatus(username, password)) {
+        System.out.println("Login Failed");
+
+        System.out.print("Please enter your Username here: ");
+        username = key.nextLine();
+
+        System.out.print("Please enter your password here: ");
+        password = key.nextLine();
     }
+
+    user = username;
+    user_password = password;
+
+    System.out.println("Login Successful");
+}
             
             
             
