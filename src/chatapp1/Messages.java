@@ -473,7 +473,7 @@ public class Messages {
 
     // This function raeds the stored messages
     public void ReadJsonFile() {
-
+        
         loadStoredMessages();
         if (storedCount == 0) {
             System.out.println("No stored messages found.");
@@ -507,7 +507,7 @@ public class Messages {
 
             choice = scanner.nextInt();
             scanner.nextLine();
-
+  
             switch (choice) {
 
                 case 1 -> DisplaySendersRecipients();
